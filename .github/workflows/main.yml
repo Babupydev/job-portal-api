@@ -27,7 +27,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-          --entrypoint sh mysql:5.7 -c "docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
 
     steps:
       - name: Checkout Code
@@ -46,8 +45,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Wait for MySQL to Start
-        run: |
-          sleep 20
+        run: sleep 20
 
       - name: Run Migrations
         env:
