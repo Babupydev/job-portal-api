@@ -10,16 +10,16 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Run on Windows
+    runs-on: ubuntu-latest  # 🖥 Switch to Ubuntu (Linux)
 
     services:
       mysql:
-        image: mysql:5.7  # Use MySQL 5.7 as the database
+        image: mysql:5.7  # 🐬 MySQL 5.7 as the database
         env:
-          MYSQL_ROOT_PASSWORD: root  # MySQL root password
-          MYSQL_DATABASE: job_portal  # Your MySQL database name
-          MYSQL_USER: root  # Your MySQL username
-          MYSQL_PASSWORD: root  # Your MySQL password
+          MYSQL_ROOT_PASSWORD: root  # ✅ MySQL root password
+          MYSQL_DATABASE: job_portal  # ✅ Your MySQL database name
+          MYSQL_USER: root  # ✅ Your MySQL username
+          MYSQL_PASSWORD: root  # ✅ Your MySQL password
         ports:
           - 3306:3306
         options: >-
@@ -29,40 +29,40 @@ jobs:
           --health-retries=5
 
     steps:
-      - name: Checkout Code  # Get the latest code
+      - name: Checkout Code  # 📥 Get the latest code
         uses: actions/checkout@v3
 
-      - name: Set up Python  # Install Python
+      - name: Set up Python  # 🐍 Install Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies  # Install Django and dependencies
+      - name: Install Dependencies  # 📦 Install Django and dependencies
         run: |
           python -m venv env
-          env\Scripts\activate
+          source env/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Migrations  # Set up the database
+      - name: Run Migrations  # 📊 Set up the database
         env:
-          DATABASE_URL: mysql://root:root@127.0.0.1:3306/job_portal  # Updated database URL
+          DATABASE_URL: mysql://root:root@127.0.0.1:3306/job_portal  # ✅ Updated database URL
         run: |
-          env\Scripts\activate
+          source env/bin/activate
           python manage.py migrate
 
-      - name: Run Tests  # Run Django Tests
+      - name: Run Tests  # ✅ Run Django Tests
         env:
-          DATABASE_URL: mysql://root:root@127.0.0.1:3306/job_portal  # Updated database URL
+          DATABASE_URL: mysql://root:root@127.0.0.1:3306/job_portal  # ✅ Updated database URL
         run: |
-          env\Scripts\activate
+          source env/bin/activate
           python manage.py test
 
   deploy:
-    needs: test  # Deploy only if tests pass
-    runs-on: windows-latest
+    needs: test  # 🚀 Deploy only if tests pass
+    runs-on: ubuntu-latest  # ✅ Use Linux for deployment
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy  # Deployment step will be updated later
+      - name: Deploy  # ⏳ Deployment step (update later)
         run: echo "Deployment step will be configured later"
