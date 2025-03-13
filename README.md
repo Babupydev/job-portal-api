@@ -45,7 +45,7 @@ A **Django REST Framework** based API for job seekers and recruiters. Candidates
 
 ## 🏠 User Profile Endpoints
 
-![Job Portal Screenshot](JOB_PORTAL\core\static\img\LOGIN.png)
+
 
 
 | **Method** | **Endpoint**          | **Description** |
@@ -53,3 +53,4 @@ A **Django REST Framework** based API for job seekers and recruiters. Candidates
 | `GET`      | `/api/profile/`      | View user profile (Authenticated users) |
 | `PUT`      | `/api/profile/update/` | Update user profile |
 
+![Login Test](https://github.com/Babupydev/job-portal-api/blob/226fbf130aebe78891011002e68dc94fd14294ec/LOGIN.png)
